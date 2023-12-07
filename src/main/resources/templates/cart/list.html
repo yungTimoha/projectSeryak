@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список корзин</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<h1>Список корзин</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Количество</th>
+        <th scope="col">Название</th>
+        <th scope="col">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cart : ${carts}">
+        <th scope="row" th:text="${cart.id}"></th>
+        <td th:text="${cart.quantity}"></td>
+        <td th:text="${cart.name}"></td>
+        <td>
+            <a th:href="@{/cart/edit/{id}(id=${cart.id})}">Редактировать</a>
+            <a th:href="@{/cart/delete/{id}(id=${cart.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/cart/add" class="btn btn-primary">Добавить корзину</a>
+<a href="/" class="btn btn-danger">Вернуться на домашнюю страницу</a>
+</body>
+</html>

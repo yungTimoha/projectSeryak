@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование заказа</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<h1>Редактирование заказа</h1>
+    <form th:action="@{/ord/edit/{id}(id=${order.id})}" method="post" th:object="${order}">
+    <input type="hidden" th:field="*{id}">
+    <div class="form-group">
+        <label for="ordDate">Дата заказа:</label>
+        <input type="date" id="ordDate" name="ordDate" th:field="*{ordDate}" required>
+    </div>
+    <div class="form-group">
+        <label for="status">Статус:</label>
+        <input type="text" id="status" name="status" th:field="*{status}" required>
+    </div>
+    <div class="form-group">
+        <label for="cart">Корзина:</label>
+        <select id="cart" name="cart.id" th:field="*{cart.id}" required>
+            <option th:each="cart : ${carts}" th:value="${cart.id}" th:text="${cart.name}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="address">Адрес:</label>
+        <select id="address" name="address.id" th:field="*{address.id}" required>
+            <option th:each="address : ${addresses}" th:value="${address.id}" th:text="${address.street}"></option>
+        </select>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+</form>
+<a href="/ord" class="btn btn-danger">Вернуться к списку заказов</a>
+</body>
+</html>
